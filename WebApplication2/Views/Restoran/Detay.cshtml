@@ -1,0 +1,106 @@
+﻿@using WebApplication2.Models;
+@model RestoranListele2
+
+@{
+    ViewBag.Title = "Detay";
+}
+
+<br>
+<div class="gallery-top section-bg pt-90 pb-40" data-background="/assets/img/gallery/section_bg01.png">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="cl-xl-7 col-lg-8 col-md-10">
+                <!-- Section Tittle -->
+                <div class="section-tittle text-center mb-70">
+                    <span>Restoran Sayfası</span>
+                    <h2>@Model.RestoranAdi</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="sample-text-area">
+    <div class="container box_1170">
+        <br>
+        <h3 class="text-heading">Hakkımızda</h3>
+        <p class="sample-text">
+        <p>@Model.DetayliBilgi</p>
+
+        <div class="section-top-border">
+            <h3 class="mb-30">Yemek Menüsü</h3>
+            <br>
+            <div class="progress-table-wrap">
+                <div class="progress-table">
+                    <div class="table-head">
+                        <div class="visit">Yemek Adı</div>
+                        <div class="serial">Fiyat</div>
+                        <div class="country">Tanım</div>
+                        <div class="visit"></div>
+                    </div>
+
+                    @foreach (UrunMenusuP_Result urun in ViewBag.urunMenu)
+                    {
+                        if (urun.RestoranKodu == Model.RestoranKodu && urun.UrunTuru == "Y")
+                        {
+                <div class="table-row">
+                    <div class="visit">@urun.UrunAdi</div>
+                    <div class="serial">@urun.Fiyat</div>
+                    <div class="country">@urun.Tanim</div>
+                    <div class="visit"><a href="/Siparis/Ekle/@urun.UrunKodu/@Model.MenuKodu/@Model.RestoranKodu" class="genric-btn info circle">Siparişe Ekle</a></div>
+                    @if (WebApplication2.Security.UserID.kullaniciID(User.Identity.Name, Model.RestoranKodu))
+                    {
+                        <div class="visit"><a href="/Restoran/urunSil/@urun.UrunKodu/@Model.MenuKodu/@Model.RestoranKodu" class="genric-btn danger circle">Ürün Sil</a></div>
+                    }
+                </div>
+                        }
+                    }
+                    @if (WebApplication2.Security.UserID.kullaniciID(User.Identity.Name, Model.RestoranKodu))
+                    {
+                        <a href="/Restoran/urunEkle/@Model.MenuKodu" class="genric-btn info circle">Ürün Ekle</a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="section-top-border">
+            <h3 class="mb-30">İçecek Menüsü</h3>
+            <br>
+            <div class="progress-table-wrap">
+                <div class="progress-table">
+                    <div class="table-head">
+                        <div class="visit">İçecek Adı</div>
+                        <div class="serial">Fiyat</div>
+                        <div class="country">Tanım</div>
+                        <div class="visit"></div>
+                    </div>
+
+                    @foreach (UrunMenusuP_Result urun in ViewBag.urunMenu)
+                    {
+                        if (urun.RestoranKodu == Model.RestoranKodu && urun.UrunTuru == "I")
+                        {
+                <div class="table-row">
+                    <div class="visit">@urun.UrunAdi</div>
+                    <div class="serial">@urun.Fiyat</div>
+                    <div class="country">@urun.Tanim</div>
+                    <div class="visit"><a href="/Siparis/Ekle/@urun.UrunKodu/@Model.MenuKodu/@Model.RestoranKodu" class="genric-btn info circle">Siparişe Ekle</a></div>
+                    @if (WebApplication2.Security.UserID.kullaniciID(User.Identity.Name, Model.RestoranKodu))
+                    {
+                        <div class="visit"><a href="/Restoran/urunSil/@urun.UrunKodu/@Model.MenuKodu/@Model.RestoranKodu" class="genric-btn danger circle">Ürün Sil</a></div>
+                    }
+                </div>
+                        }
+                    }
+                    @if (WebApplication2.Security.UserID.kullaniciID(User.Identity.Name, Model.RestoranKodu))
+                    {
+                        <a href="/Restoran/urunEkle/@Model.MenuKodu" class="genric-btn info circle">Ürün Ekle</a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

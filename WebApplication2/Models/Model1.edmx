@@ -1,0 +1,944 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="YemekSiparisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="AdresKodu" />
+          </Key>
+          <Property Name="AdresKodu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DetayliAdres" Type="varchar" MaxLength="255" />
+          <Property Name="SehirKodu" Type="int" />
+          <Property Name="IlceKodu" Type="int" />
+        </EntityType>
+        <EntityType Name="Ilce">
+          <Key>
+            <PropertyRef Name="IlceKodu" />
+          </Key>
+          <Property Name="IlceKodu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SehirKodu" Type="int" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullaniciAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sifre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="rol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdresKodu" Type="int" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuKodu" />
+          </Key>
+          <Property Name="MenuKodu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restoran">
+          <Key>
+            <PropertyRef Name="RestoranKodu" />
+          </Key>
+          <Property Name="RestoranKodu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RestoranAdi" Type="varchar" MaxLength="255" />
+          <Property Name="AdresKodu" Type="int" />
+          <Property Name="MenuKodu" Type="int" />
+          <Property Name="Tanim" Type="nvarchar" MaxLength="255" />
+          <Property Name="DetayliBilgi" Type="nvarchar" MaxLength="255" />
+          <Property Name="YetkiliID" Type="int" />
+        </EntityType>
+        <EntityType Name="Sehir">
+          <Key>
+            <PropertyRef Name="PlakaKodu" />
+          </Key>
+          <Property Name="PlakaKodu" Type="int" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Siparis">
+          <Key>
+            <PropertyRef Name="SiparisKodu" />
+          </Key>
+          <Property Name="SiparisKodu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ToplamTutar" Type="int" />
+          <Property Name="RestoranKodu" Type="int" />
+          <Property Name="KullaniciID" Type="int" />
+          <Property Name="UMKodu" Type="int" />
+          <Property Name="Tamamlandi" Type="int" />
+        </EntityType>
+        <EntityType Name="Urun">
+          <Key>
+            <PropertyRef Name="UrunKodu" />
+          </Key>
+          <Property Name="UrunKodu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UrunAdi" Type="varchar" MaxLength="255" />
+          <Property Name="UrunTuru" Type="varchar" MaxLength="255" />
+          <Property Name="Tanim" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="UrunMenu">
+          <Key>
+            <PropertyRef Name="UrunMenuNo" />
+          </Key>
+          <Property Name="UrunMenuNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fiyat" Type="int" />
+          <Property Name="MenuKodu" Type="int" />
+          <Property Name="UrunKodu" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'YemekSiparis.dbo.RestoranListele2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RestoranListele2">
+          <Key>
+            <PropertyRef Name="RestoranKodu" />
+          </Key>
+          <Property Name="RestoranKodu" Type="int" Nullable="false" />
+          <Property Name="RestoranAdi" Type="varchar" MaxLength="255" />
+          <Property Name="Tanim" Type="nvarchar" MaxLength="255" />
+          <Property Name="DetayliBilgi" Type="nvarchar" MaxLength="255" />
+          <Property Name="SehirAdi" Type="varchar" MaxLength="255" />
+          <Property Name="IlceAdi" Type="varchar" MaxLength="255" />
+          <Property Name="MenuKodu" Type="int" />
+          <Property Name="YetkiliID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'YemekSiparis.dbo.SiparisListe' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SiparisListe">
+          <Key>
+            <PropertyRef Name="SiparisKodu" />
+          </Key>
+          <Property Name="SiparisKodu" Type="int" Nullable="false" />
+          <Property Name="RestoranKodu" Type="int" />
+          <Property Name="KullaniciID" Type="int" />
+          <Property Name="UMKodu" Type="int" />
+          <Property Name="Tamamlandi" Type="int" />
+          <Property Name="UrunKodu" Type="int" />
+          <Property Name="MenuKodu" Type="int" />
+          <Property Name="YetkiliID" Type="int" />
+          <Property Name="RestoranAdi" Type="varchar" MaxLength="255" />
+          <Property Name="UrunAdi" Type="varchar" MaxLength="255" />
+          <Property Name="ToplamTutar" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'YemekSiparis.dbo.UrunMenusu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UrunMenusu">
+          <Key>
+            <PropertyRef Name="RestoranKodu" />
+            <PropertyRef Name="UrunKodu" />
+          </Key>
+          <Property Name="RestoranKodu" Type="int" Nullable="false" />
+          <Property Name="RestoranAdi" Type="varchar" MaxLength="255" />
+          <Property Name="UrunAdi" Type="varchar" MaxLength="255" />
+          <Property Name="Fiyat" Type="int" />
+          <Property Name="Tanim" Type="varchar" MaxLength="255" />
+          <Property Name="UrunTuru" Type="varchar" MaxLength="255" />
+          <Property Name="UrunKodu" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Adres__IlceKodu__37A5467C">
+          <End Role="Ilce" Type="Self.Ilce" Multiplicity="0..1" />
+          <End Role="Adres" Type="Self.Adres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ilce">
+              <PropertyRef Name="IlceKodu" />
+            </Principal>
+            <Dependent Role="Adres">
+              <PropertyRef Name="IlceKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adres__SehirKodu__36B12243">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="0..1" />
+          <End Role="Adres" Type="Self.Adres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="PlakaKodu" />
+            </Principal>
+            <Dependent Role="Adres">
+              <PropertyRef Name="SehirKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ilce__SehirKodu__29572725">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+          <End Role="Ilce" Type="Self.Ilce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="PlakaKodu" />
+            </Principal>
+            <Dependent Role="Ilce">
+              <PropertyRef Name="SehirKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kullanici__Adres__08B54D69">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="AdresKodu" />
+            </Principal>
+            <Dependent Role="Kullanici">
+              <PropertyRef Name="AdresKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restoran__AdresK__4AB81AF0">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Restoran" Type="Self.Restoran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="AdresKodu" />
+            </Principal>
+            <Dependent Role="Restoran">
+              <PropertyRef Name="AdresKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restoran__MenuKo__4BAC3F29">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Restoran" Type="Self.Restoran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuKodu" />
+            </Principal>
+            <Dependent Role="Restoran">
+              <PropertyRef Name="MenuKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restoran__Yetkil__151B244E">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="Restoran" Type="Self.Restoran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Restoran">
+              <PropertyRef Name="YetkiliID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Siparis__Kullani__09A971A2">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Siparis__Restora__5070F446">
+          <End Role="Restoran" Type="Self.Restoran" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restoran">
+              <PropertyRef Name="RestoranKodu" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="RestoranKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Siparis__UMKodu__282DF8C2">
+          <End Role="UrunMenu" Type="Self.UrunMenu" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UrunMenu">
+              <PropertyRef Name="UrunMenuNo" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="UMKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UrunMenu__MenuKo__05D8E0BE">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="UrunMenu" Type="Self.UrunMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuKodu" />
+            </Principal>
+            <Dependent Role="UrunMenu">
+              <PropertyRef Name="MenuKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UrunMenu__UrunKo__06CD04F7">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="UrunMenu" Type="Self.UrunMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="UrunKodu" />
+            </Principal>
+            <Dependent Role="UrunMenu">
+              <PropertyRef Name="UrunKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="UrunMenusuL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UrunMenusuP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="YemekSiparisModelStoreContainer">
+          <EntitySet Name="Adres" EntityType="Self.Adres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ilce" EntityType="Self.Ilce" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restoran" EntityType="Self.Restoran" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sehir" EntityType="Self.Sehir" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Siparis" EntityType="Self.Siparis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Urun" EntityType="Self.Urun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UrunMenu" EntityType="Self.UrunMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RestoranListele2" EntityType="Self.RestoranListele2" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RestoranListele2].[RestoranKodu] AS [RestoranKodu], 
+    [RestoranListele2].[RestoranAdi] AS [RestoranAdi], 
+    [RestoranListele2].[Tanim] AS [Tanim], 
+    [RestoranListele2].[DetayliBilgi] AS [DetayliBilgi], 
+    [RestoranListele2].[SehirAdi] AS [SehirAdi], 
+    [RestoranListele2].[IlceAdi] AS [IlceAdi], 
+    [RestoranListele2].[MenuKodu] AS [MenuKodu], 
+    [RestoranListele2].[YetkiliID] AS [YetkiliID]
+    FROM [dbo].[RestoranListele2] AS [RestoranListele2]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SiparisListe" EntityType="Self.SiparisListe" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SiparisListe].[SiparisKodu] AS [SiparisKodu], 
+    [SiparisListe].[RestoranKodu] AS [RestoranKodu], 
+    [SiparisListe].[KullaniciID] AS [KullaniciID], 
+    [SiparisListe].[UMKodu] AS [UMKodu], 
+    [SiparisListe].[Tamamlandi] AS [Tamamlandi], 
+    [SiparisListe].[UrunKodu] AS [UrunKodu], 
+    [SiparisListe].[MenuKodu] AS [MenuKodu], 
+    [SiparisListe].[YetkiliID] AS [YetkiliID], 
+    [SiparisListe].[RestoranAdi] AS [RestoranAdi], 
+    [SiparisListe].[UrunAdi] AS [UrunAdi], 
+    [SiparisListe].[ToplamTutar] AS [ToplamTutar]
+    FROM [dbo].[SiparisListe] AS [SiparisListe]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UrunMenusu" EntityType="Self.UrunMenusu" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UrunMenusu].[RestoranKodu] AS [RestoranKodu], 
+    [UrunMenusu].[RestoranAdi] AS [RestoranAdi], 
+    [UrunMenusu].[UrunAdi] AS [UrunAdi], 
+    [UrunMenusu].[Fiyat] AS [Fiyat], 
+    [UrunMenusu].[Tanim] AS [Tanim], 
+    [UrunMenusu].[UrunTuru] AS [UrunTuru], 
+    [UrunMenusu].[UrunKodu] AS [UrunKodu]
+    FROM [dbo].[UrunMenusu] AS [UrunMenusu]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Adres__IlceKodu__37A5467C" Association="Self.FK__Adres__IlceKodu__37A5467C">
+            <End Role="Ilce" EntitySet="Ilce" />
+            <End Role="Adres" EntitySet="Adres" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adres__SehirKodu__36B12243" Association="Self.FK__Adres__SehirKodu__36B12243">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="Adres" EntitySet="Adres" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ilce__SehirKodu__29572725" Association="Self.FK__Ilce__SehirKodu__29572725">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="Ilce" EntitySet="Ilce" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kullanici__Adres__08B54D69" Association="Self.FK__Kullanici__Adres__08B54D69">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Kullanici" EntitySet="Kullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restoran__AdresK__4AB81AF0" Association="Self.FK__Restoran__AdresK__4AB81AF0">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Restoran" EntitySet="Restoran" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restoran__MenuKo__4BAC3F29" Association="Self.FK__Restoran__MenuKo__4BAC3F29">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Restoran" EntitySet="Restoran" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restoran__Yetkil__151B244E" Association="Self.FK__Restoran__Yetkil__151B244E">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Restoran" EntitySet="Restoran" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Siparis__Kullani__09A971A2" Association="Self.FK__Siparis__Kullani__09A971A2">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Siparis__Restora__5070F446" Association="Self.FK__Siparis__Restora__5070F446">
+            <End Role="Restoran" EntitySet="Restoran" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Siparis__UMKodu__282DF8C2" Association="Self.FK__Siparis__UMKodu__282DF8C2">
+            <End Role="UrunMenu" EntitySet="UrunMenu" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UrunMenu__MenuKo__05D8E0BE" Association="Self.FK__UrunMenu__MenuKo__05D8E0BE">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="UrunMenu" EntitySet="UrunMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UrunMenu__UrunKo__06CD04F7" Association="Self.FK__UrunMenu__UrunKo__06CD04F7">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="UrunMenu" EntitySet="UrunMenu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="YemekSiparisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="AdresKodu" />
+          </Key>
+          <Property Name="AdresKodu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DetayliAdres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SehirKodu" Type="Int32" />
+          <Property Name="IlceKodu" Type="Int32" />
+          <NavigationProperty Name="Ilce" Relationship="Self.FK__Adres__IlceKodu__37A5467C" FromRole="Adres" ToRole="Ilce" />
+          <NavigationProperty Name="Sehir" Relationship="Self.FK__Adres__SehirKodu__36B12243" FromRole="Adres" ToRole="Sehir" />
+          <NavigationProperty Name="Restoran" Relationship="Self.FK__Restoran__AdresK__4AB81AF0" FromRole="Adres" ToRole="Restoran" />
+          <NavigationProperty Name="Kullanici" Relationship="YemekSiparisModel.FK__Kullanici__Adres__08B54D69" FromRole="Adres" ToRole="Kullanici" />
+        </EntityType>
+        <EntityType Name="Ilce">
+          <Key>
+            <PropertyRef Name="IlceKodu" />
+          </Key>
+          <Property Name="IlceKodu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SehirKodu" Type="Int32" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Adres" Relationship="Self.FK__Adres__IlceKodu__37A5467C" FromRole="Ilce" ToRole="Adres" />
+          <NavigationProperty Name="Sehir" Relationship="Self.FK__Ilce__SehirKodu__29572725" FromRole="Ilce" ToRole="Sehir" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdresKodu" Type="Int32" />
+          <NavigationProperty Name="Adres" Relationship="YemekSiparisModel.FK__Kullanici__Adres__08B54D69" FromRole="Kullanici" ToRole="Adres" />
+          <NavigationProperty Name="Siparis" Relationship="YemekSiparisModel.FK__Siparis__Kullani__09A971A2" FromRole="Kullanici" ToRole="Siparis" />
+          <NavigationProperty Name="Restoran" Relationship="YemekSiparisModel.FK__Restoran__Yetkil__151B244E" FromRole="Kullanici" ToRole="Restoran" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuKodu" />
+          </Key>
+          <Property Name="MenuKodu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Restoran" Relationship="Self.FK__Restoran__MenuKo__4BAC3F29" FromRole="Menu" ToRole="Restoran" />
+          <NavigationProperty Name="UrunMenu" Relationship="YemekSiparisModel.FK__UrunMenu__MenuKo__05D8E0BE" FromRole="Menu" ToRole="UrunMenu" />
+        </EntityType>
+        <EntityType Name="Restoran">
+          <Key>
+            <PropertyRef Name="RestoranKodu" />
+          </Key>
+          <Property Name="RestoranKodu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RestoranAdi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AdresKodu" Type="Int32" />
+          <Property Name="MenuKodu" Type="Int32" />
+          <NavigationProperty Name="Adres" Relationship="Self.FK__Restoran__AdresK__4AB81AF0" FromRole="Restoran" ToRole="Adres" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK__Restoran__MenuKo__4BAC3F29" FromRole="Restoran" ToRole="Menu" />
+          <NavigationProperty Name="Siparis" Relationship="Self.FK__Siparis__Restora__5070F446" FromRole="Restoran" ToRole="Siparis" />
+          <Property Name="Tanim" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DetayliBilgi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="YetkiliID" Type="Int32" />
+          <NavigationProperty Name="Kullanici" Relationship="YemekSiparisModel.FK__Restoran__Yetkil__151B244E" FromRole="Restoran" ToRole="Kullanici" />
+        </EntityType>
+        <EntityType Name="Sehir">
+          <Key>
+            <PropertyRef Name="PlakaKodu" />
+          </Key>
+          <Property Name="PlakaKodu" Type="Int32" Nullable="false" />
+          <Property Name="Ad" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Adres" Relationship="Self.FK__Adres__SehirKodu__36B12243" FromRole="Sehir" ToRole="Adres" />
+          <NavigationProperty Name="Ilce" Relationship="Self.FK__Ilce__SehirKodu__29572725" FromRole="Sehir" ToRole="Ilce" />
+        </EntityType>
+        <EntityType Name="Siparis">
+          <Key>
+            <PropertyRef Name="SiparisKodu" />
+          </Key>
+          <Property Name="SiparisKodu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ToplamTutar" Type="Int32" />
+          <Property Name="RestoranKodu" Type="Int32" />
+          <NavigationProperty Name="Restoran" Relationship="Self.FK__Siparis__Restora__5070F446" FromRole="Siparis" ToRole="Restoran" />
+          <Property Name="KullaniciID" Type="Int32" />
+          <NavigationProperty Name="Kullanici" Relationship="YemekSiparisModel.FK__Siparis__Kullani__09A971A2" FromRole="Siparis" ToRole="Kullanici" />
+          <Property Name="UMKodu" Type="Int32" />
+          <NavigationProperty Name="UrunMenu" Relationship="YemekSiparisModel.FK__Siparis__UMKodu__282DF8C2" FromRole="Siparis" ToRole="UrunMenu" />
+          <Property Name="Tamamlandi" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__Adres__IlceKodu__37A5467C">
+          <End Role="Ilce" Type="Self.Ilce" Multiplicity="0..1" />
+          <End Role="Adres" Type="Self.Adres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ilce">
+              <PropertyRef Name="IlceKodu" />
+            </Principal>
+            <Dependent Role="Adres">
+              <PropertyRef Name="IlceKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adres__SehirKodu__36B12243">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="0..1" />
+          <End Role="Adres" Type="Self.Adres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="PlakaKodu" />
+            </Principal>
+            <Dependent Role="Adres">
+              <PropertyRef Name="SehirKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restoran__AdresK__4AB81AF0">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Restoran" Type="Self.Restoran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="AdresKodu" />
+            </Principal>
+            <Dependent Role="Restoran">
+              <PropertyRef Name="AdresKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ilce__SehirKodu__29572725">
+          <End Role="Sehir" Type="Self.Sehir" Multiplicity="1" />
+          <End Role="Ilce" Type="Self.Ilce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sehir">
+              <PropertyRef Name="PlakaKodu" />
+            </Principal>
+            <Dependent Role="Ilce">
+              <PropertyRef Name="SehirKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restoran__MenuKo__4BAC3F29">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Restoran" Type="Self.Restoran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuKodu" />
+            </Principal>
+            <Dependent Role="Restoran">
+              <PropertyRef Name="MenuKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Siparis__Restora__5070F446">
+          <End Role="Restoran" Type="Self.Restoran" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restoran">
+              <PropertyRef Name="RestoranKodu" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="RestoranKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YemekSiparisEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adres" EntityType="Self.Adres" />
+          <EntitySet Name="Ilce" EntityType="Self.Ilce" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
+          <EntitySet Name="Restoran" EntityType="Self.Restoran" />
+          <EntitySet Name="Sehir" EntityType="Self.Sehir" />
+          <EntitySet Name="Siparis" EntityType="Self.Siparis" />
+          <AssociationSet Name="FK__Adres__IlceKodu__37A5467C" Association="Self.FK__Adres__IlceKodu__37A5467C">
+            <End Role="Ilce" EntitySet="Ilce" />
+            <End Role="Adres" EntitySet="Adres" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adres__SehirKodu__36B12243" Association="Self.FK__Adres__SehirKodu__36B12243">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="Adres" EntitySet="Adres" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restoran__AdresK__4AB81AF0" Association="Self.FK__Restoran__AdresK__4AB81AF0">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Restoran" EntitySet="Restoran" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ilce__SehirKodu__29572725" Association="Self.FK__Ilce__SehirKodu__29572725">
+            <End Role="Sehir" EntitySet="Sehir" />
+            <End Role="Ilce" EntitySet="Ilce" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restoran__MenuKo__4BAC3F29" Association="Self.FK__Restoran__MenuKo__4BAC3F29">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Restoran" EntitySet="Restoran" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Siparis__Restora__5070F446" Association="Self.FK__Siparis__Restora__5070F446">
+            <End Role="Restoran" EntitySet="Restoran" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <EntitySet Name="RestoranListele2" EntityType="YemekSiparisModel.RestoranListele2" />
+          <EntitySet Name="Urun" EntityType="YemekSiparisModel.Urun" />
+          <EntitySet Name="UrunMenu" EntityType="YemekSiparisModel.UrunMenu" />
+          <AssociationSet Name="FK__UrunMenu__MenuKo__05D8E0BE" Association="YemekSiparisModel.FK__UrunMenu__MenuKo__05D8E0BE">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="UrunMenu" EntitySet="UrunMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UrunMenu__UrunKo__06CD04F7" Association="YemekSiparisModel.FK__UrunMenu__UrunKo__06CD04F7">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="UrunMenu" EntitySet="UrunMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kullanici__Adres__08B54D69" Association="YemekSiparisModel.FK__Kullanici__Adres__08B54D69">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Kullanici" EntitySet="Kullanici" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Siparis__Kullani__09A971A2" Association="YemekSiparisModel.FK__Siparis__Kullani__09A971A2">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <EntitySet Name="UrunMenusu" EntityType="YemekSiparisModel.UrunMenusu" />
+          <FunctionImport Name="UrunMenusuL" ReturnType="Collection(YemekSiparisModel.UrunMenusuL_Result)" />
+          <AssociationSet Name="FK__Restoran__Yetkil__151B244E" Association="YemekSiparisModel.FK__Restoran__Yetkil__151B244E">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Restoran" EntitySet="Restoran" />
+          </AssociationSet>
+          <FunctionImport Name="UrunMenusuP" ReturnType="Collection(YemekSiparisModel.UrunMenusuP_Result)" />
+          <AssociationSet Name="FK__Siparis__UMKodu__282DF8C2" Association="YemekSiparisModel.FK__Siparis__UMKodu__282DF8C2">
+            <End Role="UrunMenu" EntitySet="UrunMenu" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <EntitySet Name="SiparisListe" EntityType="YemekSiparisModel.SiparisListe" />
+        </EntityContainer>
+        <EntityType Name="RestoranListele2">
+          <Key>
+            <PropertyRef Name="RestoranKodu" />
+          </Key>
+          <Property Name="RestoranKodu" Type="Int32" Nullable="false" />
+          <Property Name="RestoranAdi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Tanim" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DetayliBilgi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SehirAdi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IlceAdi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MenuKodu" Type="Int32" />
+          <Property Name="YetkiliID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Urun">
+          <Key>
+            <PropertyRef Name="UrunKodu" />
+          </Key>
+          <Property Name="UrunKodu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UrunAdi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UrunTuru" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Tanim" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UrunMenu" Relationship="YemekSiparisModel.FK__UrunMenu__UrunKo__06CD04F7" FromRole="Urun" ToRole="UrunMenu" />
+        </EntityType>
+        <EntityType Name="UrunMenu">
+          <Key>
+            <PropertyRef Name="UrunMenuNo" />
+          </Key>
+          <Property Name="UrunMenuNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fiyat" Type="Int32" />
+          <Property Name="MenuKodu" Type="Int32" />
+          <Property Name="UrunKodu" Type="Int32" />
+          <NavigationProperty Name="Menu" Relationship="YemekSiparisModel.FK__UrunMenu__MenuKo__05D8E0BE" FromRole="UrunMenu" ToRole="Menu" />
+          <NavigationProperty Name="Urun" Relationship="YemekSiparisModel.FK__UrunMenu__UrunKo__06CD04F7" FromRole="UrunMenu" ToRole="Urun" />
+          <NavigationProperty Name="Siparis" Relationship="YemekSiparisModel.FK__Siparis__UMKodu__282DF8C2" FromRole="UrunMenu" ToRole="Siparis" />
+        </EntityType>
+        <Association Name="FK__UrunMenu__MenuKo__05D8E0BE">
+          <End Type="YemekSiparisModel.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="YemekSiparisModel.UrunMenu" Role="UrunMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuKodu" />
+            </Principal>
+            <Dependent Role="UrunMenu">
+              <PropertyRef Name="MenuKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UrunMenu__UrunKo__06CD04F7">
+          <End Type="YemekSiparisModel.Urun" Role="Urun" Multiplicity="0..1" />
+          <End Type="YemekSiparisModel.UrunMenu" Role="UrunMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="UrunKodu" />
+            </Principal>
+            <Dependent Role="UrunMenu">
+              <PropertyRef Name="UrunKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kullanici__Adres__08B54D69">
+          <End Type="YemekSiparisModel.Adres" Role="Adres" Multiplicity="0..1" />
+          <End Type="YemekSiparisModel.Kullanici" Role="Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="AdresKodu" />
+            </Principal>
+            <Dependent Role="Kullanici">
+              <PropertyRef Name="AdresKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Siparis__Kullani__09A971A2">
+          <End Type="YemekSiparisModel.Kullanici" Role="Kullanici" Multiplicity="0..1" />
+          <End Type="YemekSiparisModel.Siparis" Role="Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UrunMenusu">
+          <Key>
+            <PropertyRef Name="RestoranKodu" />
+            <PropertyRef Name="UrunKodu" />
+          </Key>
+          <Property Name="RestoranKodu" Type="Int32" Nullable="false" />
+          <Property Name="RestoranAdi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UrunAdi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Fiyat" Type="Int32" />
+          <Property Name="Tanim" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UrunTuru" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UrunKodu" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="UrunMenusuL_Result">
+          <Property Type="Int32" Name="RestoranKodu" Nullable="false" />
+          <Property Type="String" Name="RestoranAdi" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="UrunAdi" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Fiyat" Nullable="true" />
+          <Property Type="String" Name="Tanim" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="UrunTuru" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <Association Name="FK__Restoran__Yetkil__151B244E">
+          <End Type="YemekSiparisModel.Kullanici" Role="Kullanici" Multiplicity="0..1" />
+          <End Type="YemekSiparisModel.Restoran" Role="Restoran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Restoran">
+              <PropertyRef Name="YetkiliID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UrunMenusuP_Result">
+          <Property Type="Int32" Name="RestoranKodu" Nullable="false" />
+          <Property Type="String" Name="RestoranAdi" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="UrunAdi" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Fiyat" Nullable="true" />
+          <Property Type="String" Name="Tanim" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="UrunTuru" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="UrunKodu" Nullable="false" />
+        </ComplexType>
+        <Association Name="FK__Siparis__UMKodu__282DF8C2">
+          <End Type="YemekSiparisModel.UrunMenu" Role="UrunMenu" Multiplicity="0..1" />
+          <End Type="YemekSiparisModel.Siparis" Role="Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UrunMenu">
+              <PropertyRef Name="UrunMenuNo" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="UMKodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SiparisListe">
+          <Key>
+            <PropertyRef Name="SiparisKodu" />
+          </Key>
+          <Property Name="SiparisKodu" Type="Int32" Nullable="false" />
+          <Property Name="RestoranKodu" Type="Int32" />
+          <Property Name="KullaniciID" Type="Int32" />
+          <Property Name="UMKodu" Type="Int32" />
+          <Property Name="Tamamlandi" Type="Int32" />
+          <Property Name="RestoranAdi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UrunAdi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ToplamTutar" Type="Int32" />
+          <Property Name="UrunKodu" Type="Int32" />
+          <Property Name="MenuKodu" Type="Int32" />
+          <Property Name="YetkiliID" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="YemekSiparisModelStoreContainer" CdmEntityContainer="YemekSiparisEntities">
+          <EntitySetMapping Name="Adres">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Adres">
+              <MappingFragment StoreEntitySet="Adres">
+                <ScalarProperty Name="AdresKodu" ColumnName="AdresKodu" />
+                <ScalarProperty Name="DetayliAdres" ColumnName="DetayliAdres" />
+                <ScalarProperty Name="SehirKodu" ColumnName="SehirKodu" />
+                <ScalarProperty Name="IlceKodu" ColumnName="IlceKodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ilce">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Ilce">
+              <MappingFragment StoreEntitySet="Ilce">
+                <ScalarProperty Name="IlceKodu" ColumnName="IlceKodu" />
+                <ScalarProperty Name="SehirKodu" ColumnName="SehirKodu" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanici">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Kullanici">
+              <MappingFragment StoreEntitySet="Kullanici">
+                <ScalarProperty Name="AdresKodu" ColumnName="AdresKodu" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="kullaniciAdi" ColumnName="kullaniciAdi" />
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="MenuKodu" ColumnName="MenuKodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restoran">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Restoran">
+              <MappingFragment StoreEntitySet="Restoran">
+                <ScalarProperty Name="YetkiliID" ColumnName="YetkiliID" />
+                <ScalarProperty Name="DetayliBilgi" ColumnName="DetayliBilgi" />
+                <ScalarProperty Name="Tanim" ColumnName="Tanim" />
+                <ScalarProperty Name="RestoranKodu" ColumnName="RestoranKodu" />
+                <ScalarProperty Name="RestoranAdi" ColumnName="RestoranAdi" />
+                <ScalarProperty Name="AdresKodu" ColumnName="AdresKodu" />
+                <ScalarProperty Name="MenuKodu" ColumnName="MenuKodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sehir">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Sehir">
+              <MappingFragment StoreEntitySet="Sehir">
+                <ScalarProperty Name="PlakaKodu" ColumnName="PlakaKodu" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Siparis">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Siparis">
+              <MappingFragment StoreEntitySet="Siparis">
+                <ScalarProperty Name="Tamamlandi" ColumnName="Tamamlandi" />
+                <ScalarProperty Name="UMKodu" ColumnName="UMKodu" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="SiparisKodu" ColumnName="SiparisKodu" />
+                <ScalarProperty Name="ToplamTutar" ColumnName="ToplamTutar" />
+                <ScalarProperty Name="RestoranKodu" ColumnName="RestoranKodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RestoranListele2">
+            <EntityTypeMapping TypeName="YemekSiparisModel.RestoranListele2">
+              <MappingFragment StoreEntitySet="RestoranListele2">
+                <ScalarProperty Name="YetkiliID" ColumnName="YetkiliID" />
+                <ScalarProperty Name="MenuKodu" ColumnName="MenuKodu" />
+                <ScalarProperty Name="IlceAdi" ColumnName="IlceAdi" />
+                <ScalarProperty Name="SehirAdi" ColumnName="SehirAdi" />
+                <ScalarProperty Name="DetayliBilgi" ColumnName="DetayliBilgi" />
+                <ScalarProperty Name="Tanim" ColumnName="Tanim" />
+                <ScalarProperty Name="RestoranAdi" ColumnName="RestoranAdi" />
+                <ScalarProperty Name="RestoranKodu" ColumnName="RestoranKodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Urun">
+            <EntityTypeMapping TypeName="YemekSiparisModel.Urun">
+              <MappingFragment StoreEntitySet="Urun">
+                <ScalarProperty Name="Tanim" ColumnName="Tanim" />
+                <ScalarProperty Name="UrunTuru" ColumnName="UrunTuru" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="UrunKodu" ColumnName="UrunKodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UrunMenu">
+            <EntityTypeMapping TypeName="YemekSiparisModel.UrunMenu">
+              <MappingFragment StoreEntitySet="UrunMenu">
+                <ScalarProperty Name="UrunKodu" ColumnName="UrunKodu" />
+                <ScalarProperty Name="MenuKodu" ColumnName="MenuKodu" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="UrunMenuNo" ColumnName="UrunMenuNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UrunMenusu">
+            <EntityTypeMapping TypeName="YemekSiparisModel.UrunMenusu">
+              <MappingFragment StoreEntitySet="UrunMenusu">
+                <ScalarProperty Name="UrunKodu" ColumnName="UrunKodu" />
+                <ScalarProperty Name="UrunTuru" ColumnName="UrunTuru" />
+                <ScalarProperty Name="Tanim" ColumnName="Tanim" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="RestoranAdi" ColumnName="RestoranAdi" />
+                <ScalarProperty Name="RestoranKodu" ColumnName="RestoranKodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UrunMenusuL" FunctionName="YemekSiparisModel.Store.UrunMenusuL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="YemekSiparisModel.UrunMenusuL_Result">
+                <ScalarProperty Name="RestoranKodu" ColumnName="RestoranKodu" />
+                <ScalarProperty Name="RestoranAdi" ColumnName="RestoranAdi" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Tanim" ColumnName="Tanim" />
+                <ScalarProperty Name="UrunTuru" ColumnName="UrunTuru" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UrunMenusuP" FunctionName="YemekSiparisModel.Store.UrunMenusuP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="YemekSiparisModel.UrunMenusuP_Result">
+                <ScalarProperty Name="RestoranKodu" ColumnName="RestoranKodu" />
+                <ScalarProperty Name="RestoranAdi" ColumnName="RestoranAdi" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Tanim" ColumnName="Tanim" />
+                <ScalarProperty Name="UrunTuru" ColumnName="UrunTuru" />
+                <ScalarProperty Name="UrunKodu" ColumnName="UrunKodu" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="SiparisListe">
+            <EntityTypeMapping TypeName="YemekSiparisModel.SiparisListe">
+              <MappingFragment StoreEntitySet="SiparisListe">
+                <ScalarProperty Name="YetkiliID" ColumnName="YetkiliID" />
+                <ScalarProperty Name="MenuKodu" ColumnName="MenuKodu" />
+                <ScalarProperty Name="UrunKodu" ColumnName="UrunKodu" />
+                <ScalarProperty Name="ToplamTutar" ColumnName="ToplamTutar" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="RestoranAdi" ColumnName="RestoranAdi" />
+                <ScalarProperty Name="Tamamlandi" ColumnName="Tamamlandi" />
+                <ScalarProperty Name="UMKodu" ColumnName="UMKodu" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="RestoranKodu" ColumnName="RestoranKodu" />
+                <ScalarProperty Name="SiparisKodu" ColumnName="SiparisKodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

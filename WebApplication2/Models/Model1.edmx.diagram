@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8eccf2abe5314b66857c103ef41bdf75" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="YemekSiparisModel.Adres" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Ilce" Width="1.5" PointX="1.5" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Kullanici" Width="1.5" PointX="5.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Menu" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Restoran" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Sehir" Width="1.5" PointX="1.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Siparis" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Adres__IlceKodu__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Adres__SehirKodu__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Restoran__AdresK__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Ilce__SehirKodu__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Restoran__MenuKo__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Siparis__Restora__5070F446" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="YemekSiparisModel.RestoranListele2" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="YemekSiparisModel.Urun" Width="1.5" PointX="0.75" PointY="7.875" />
+        <EntityTypeShape EntityType="YemekSiparisModel.UrunMenu" Width="1.5" PointX="3" PointY="5.75" />
+        <AssociationConnector Association="YemekSiparisModel.FK__UrunMenu__MenuKo__05D8E0BE" />
+        <AssociationConnector Association="YemekSiparisModel.FK__UrunMenu__UrunKo__06CD04F7" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Kullanici__Adres__08B54D69" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Siparis__Kullani__09A971A2" />
+        <EntityTypeShape EntityType="YemekSiparisModel.UrunMenusu" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Restoran__Yetkil__151B244E" />
+        <AssociationConnector Association="YemekSiparisModel.FK__Siparis__UMKodu__282DF8C2" />
+        <EntityTypeShape EntityType="YemekSiparisModel.SiparisListe" Width="1.5" PointX="8.375" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

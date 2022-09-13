@@ -1,0 +1,75 @@
+﻿@using WebApplication2.Models;
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    @if (User.IsInRole("M") || User.IsInRole("R"))
+    {
+        <meta http-equiv="refresh" content="0; url=/Profile/Index" />
+        <meta />
+    }
+</head>
+
+<div class="whole-wrap">
+    <div class="container box_1170">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <br>
+                    <br>
+                    <br>
+                    <h3 class="mb-30"><u>Kayıt Sayfası</u></h3>
+                    <form method="post" action="/Register/Index/">
+                        <input type="hidden" name="SehirKodu" value="@ViewBag.ilist[0].SehirKodu" />
+                        <div class="mt-10">
+                            <input type="text" name="kullaniciAdi" placeholder="Kullanıcı Adı"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Kullanıcı Adı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="password" name="sifre" placeholder="Şifre"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Şifre'" required
+                                   class="single-input">
+                        </div>
+                        <br>
+                        <p>
+                            İlçe
+                            <div class="default-select">
+                                <select name="IlceKodu">
+                                    @foreach (Ilce i in ViewBag.ilist)
+                                    {
+                                        <option value="@i.IlceKodu">@i.Ad</option>
+                                    }
+
+                                </select>
+                            </div>
+                        </p>
+
+                        <div class="mt-10">
+                            <input type="text" name="DetayliAdres" placeholder="Detaylı Adres"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Detaylı Adres'" required
+                                   class="single-input">
+                        </div>
+                        <br>
+                        <div class="default-select">
+                            <select name="rol">
+                                <option value="M">Müşteri</option>
+                                <option value="R">Restoran</option>
+                            </select>
+                        </div>
+                        <br>
+                        <button type="submit" class="genric-btn primary radius">Kayıt Ol</button>
+                        <br>
+                        <br>
+                        <a href="/Login/Index" class="genric-btn primary-border small">Zaten hesabınız varsa giriş yapmak için buraya tıklayın.</a>
+                        <br>
+                        <br>
+                        <p>@ViewBag.uyari</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

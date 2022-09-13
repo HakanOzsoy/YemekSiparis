@@ -1,0 +1,47 @@
+﻿@{ 
+    ViewBag.Title = "Üye Girişi";
+}
+
+<head>
+    @if (User.IsInRole("M") || User.IsInRole("R"))
+    {
+        <meta http-equiv="refresh" content="0; url=/Profile/Index" />
+        <meta />
+    }
+</head>
+
+<div class="whole-wrap">
+    <div class="container box_1170">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <br>
+                    <br>
+                    <br>
+                    <h3 class="mb-30"><u>Giriş Sayfası</u></h3>
+                    <form method="post" action="/Login/Index/">
+                        <div class="mt-10">
+                            <input type="text" name="kullaniciAdi" placeholder="Kullanıcı Adı"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Kullanıcı Adı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="password" name="sifre" placeholder="Şifre"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Şifre'" required
+                                   class="single-input">
+                        </div>
+                        <br>
+                        <button type="submit" class="genric-btn primary radius">Giriş Yap</button>
+                        <br>
+                        <br>
+                        <a href="/Register/Index2" class="genric-btn primary-border small">Üye değilseniz kayıt olmak için buraya tıklayın.</a>
+                        <br>
+                        <br>
+                        <p>@ViewBag.mesaj</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+   

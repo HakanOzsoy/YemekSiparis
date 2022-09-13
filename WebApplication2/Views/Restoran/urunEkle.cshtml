@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "urunEkle";
+}
+
+<div class="whole-wrap">
+    <div class="container box_1170">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <br>
+                    <br>
+                    <br>
+                    <h3 class="mb-30"><u>Ürün Ekle</u></h3>
+                    <form method="post" action="/Restoran/urunEkle2">
+                        <div class="mt-10">
+                            <input type="text" name="UrunAdi" placeholder="Ürün Adı"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ürün Adı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="text" name="Tanim" placeholder="Ürün Tanımı"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ürün Tanımı'" required
+                                   class="single-input">
+                        </div>
+                        <div class="mt-10">
+                            <input type="number" name="Fiyat" placeholder="Ürün Fiyatı"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ürün Fiyatı'" required
+                                   class="single-input">
+                        </div>
+                        <br>
+                        <input type="hidden" name="MenuKodu" value="@ViewBag.menuK" />
+                        <div class="default-select">
+                            <select name="UrunTuru">
+                                <option value="Y">Yemek</option>
+                                <option value="I">İçecek</option>
+                            </select>
+                        </div>
+
+                        <br>
+                        <button type="submit" class="genric-btn primary radius">Ürün Ekle</button>
+                        <br>
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

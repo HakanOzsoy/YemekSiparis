@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Profil";
+}
+
+<section class="sample-text-area">
+    <div class="container box_1170">
+        <br>
+        <h3 class="text-heading">Profil Sayfası</h3>
+        <p class="sample-text">
+            <p>Profilinize hoşgeldiniz.</p>
+            <p><b>Kullanıcı adı: </b>@User.Identity.Name</p>
+            <p><b>Kullanıcı rolleri: </b>
+            @foreach (string rol in Roles.GetRolesForUser(User.Identity.Name)) 
+            {
+                @rol
+            }
+            </p>
+            <p><b>Kullanıcı adresi: </b>@ViewBag.detayli</p>
+    </div>
+</section>

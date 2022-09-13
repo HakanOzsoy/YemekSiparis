@@ -1,0 +1,66 @@
+﻿@using WebApplication2.Models;
+@model List<SiparisListe>
+@{
+    ViewBag.Title = "Siparişler";
+}
+
+<section class="sample-text-area">
+    <div class="container box_1170">
+        <br>
+        <h3 class="text-heading">Siparişler</h3>
+        <p class="sample-text">
+            <div class="section-top-border">
+                <h3 class="mb-30">Tamamlanmamış Siparişler:</h3>
+                <br>
+                <div class="progress-table-wrap">
+                    <div class="progress-table">
+                        <div class="table-head">
+                            <div class="visit">Restoran Adı</div>
+                            <div class="visit">Ürün Adı</div>
+                            <div class="visit">Fiyat</div>
+                            <div class="visit"></div>
+                        </div>
+                        @foreach (var item in Model)
+                        {
+                            if (item.KullaniciID == WebApplication2.Security.UserID.idBul(User.Identity.Name) && item.Tamamlandi == 0)
+                            {
+                                <div class="table-row">
+                                    <div class="visit"><a href="/Restoran/Detay/@item.RestoranKodu" class="genric-btn primary-border radius e-large">@item.RestoranAdi</a></div>
+                                    <div class="visit">@item.UrunAdi</div>
+                                    <div class="visit">@item.ToplamTutar</div>
+                                    <div class="visit"><a href="/Siparis/urunCikar/@item.SiparisKodu" class="genric-btn danger circle">Siparişten Çıkar</a></div>
+                                </div>
+                            }
+                        }
+                        <a href="/Siparis/Tamamla/@WebApplication2.Security.UserID.idBul(User.Identity.Name)" class="genric-btn info circle">Siparişi Tamamla</a>
+                    </div>
+                </div>
+                <br>
+                <h3 class="mb-30">Önceki Siparişler:</h3>
+                <br>
+                <div class="progress-table-wrap">
+                    <div class="progress-table">
+                        <div class="table-head">
+                            <div class="visit">Restoran Adı</div>
+                            <div class="visit">Ürün Adı</div>
+                            <div class="visit">Fiyat</div>
+                            <div class="visit"></div>
+                        </div>
+                        @foreach (var item in Model)
+                        {
+                            if (item.KullaniciID == WebApplication2.Security.UserID.idBul(User.Identity.Name) && item.Tamamlandi == 1)
+                            {
+                                <div class="table-row">
+                                    <div class="visit"><a href="/Restoran/Detay/@item.RestoranKodu" class="genric-btn primary-border radius e-large">@item.RestoranAdi</a></div>
+                                    <div class="visit">@item.UrunAdi</div>
+                                    <div class="visit">@item.ToplamTutar</div>
+                                    <div class="visit"><a href="/Siparis/Ekle/@item.UrunKodu/@item.MenuKodu/@item.RestoranKodu" class="genric-btn danger circle">Tekrar Sipariş Et</a></div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+    </div>
+</section>
+
